@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import NotFound from "./components/NotFound";
+import NotFound from "./components/notFound";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from "./pages/home";
 
