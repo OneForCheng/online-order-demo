@@ -5,14 +5,21 @@ import reportWebVitals from './reportWebVitals';
 import NotFound from "./components/notFound";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from "./pages/home";
+import { createStore } from 'redux';
+import reducers from './redux/reducers'
+import {Provider} from "react-redux";
+
+const store = createStore(reducers)
 
 ReactDOM.render(
-    <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="*" element={<NotFound />} />
-        </Routes>
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </BrowserRouter>
+    </Provider>,
   document.getElementById('root')
 );
 
