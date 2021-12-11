@@ -5,11 +5,18 @@ import reportWebVitals from './reportWebVitals';
 import NotFound from "./components/notFound";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from "./pages/home";
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import reducers from './redux/reducers'
-import {Provider} from "react-redux";
+import { registerSagaWithMiddleware } from './redux/saga';
+import { Provider } from 'react-redux';
+import createSagaMiddleware from 'redux-saga'
 
-const store = createStore(reducers)
+const sagaMiddleware = createSagaMiddleware()
+
+const initialState = {};
+const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware))
+
+registerSagaWithMiddleware(sagaMiddleware);
 
 ReactDOM.render(
     <Provider store={store}>
