@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { FoodList } from './index';
 
 describe('FoodList', () => {
@@ -11,5 +11,11 @@ describe('FoodList', () => {
       page: 1,
       size: 10,
     })
+  });
+
+  it('should show `暂无数据` when food table is empty', () => {
+    render(<FoodList foodListData={{ content: [] }} fetchFoodList={() => {}} />);
+    const linkElement = screen.getByText(/暂无数据/i);
+    expect(linkElement).toBeInTheDocument();
   });
 });

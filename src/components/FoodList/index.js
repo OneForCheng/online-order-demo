@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchFoodList } from '../../redux/actions/foodAction';
-import { Table } from 'antd';
+import { Empty, Table } from 'antd';
 
 
 const columns = [
@@ -50,6 +50,7 @@ export class FoodList extends Component {
   render() {
     const { content, totalElements = 0 } = this.props.foodListData;
     return (<Table
+      locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无数据" /> }}
       dataSource={content}
       columns={columns}
       pagination={{
