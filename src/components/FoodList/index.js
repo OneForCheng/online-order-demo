@@ -1,6 +1,27 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchFoodList } from '../../redux/actions/foodAction';
+import { Table } from 'antd';
+
+
+const columns = [
+  {
+    title: '序号',
+    render:(text, record, index) => `${index+1}`,
+  },
+  {
+    title: '餐品名称',
+    dataIndex: 'name',
+  },
+  {
+    title: '价格',
+    dataIndex: 'price',
+  },
+  {
+    title: '描述',
+    dataIndex: 'description',
+  },
+];
 
 export class FoodList extends Component {
   constructor(props) {
@@ -20,10 +41,25 @@ export class FoodList extends Component {
     this.props.fetchFoodList({ page, size });
   }
 
+  onPageChange = page => {
+    this.setState({
+      page,
+    }, this.loadData);
+  }
+
   render() {
-    return (<div>
-      FoodList
-    </div>)
+    const { content, totalElements = 0 } = this.props.foodListData;
+    return (<Table
+      dataSource={content}
+      columns={columns}
+      pagination={{
+      total: totalElements,
+      current: this.state.page,
+      showTotal: (total) => `共${total.toLocaleString()}项结果`,
+      pageSize: this.state.size,
+      onChange: this.onPageChange,
+      }}
+    />)
   }
 }
 

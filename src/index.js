@@ -10,6 +10,7 @@ import reducers from './redux/reducers'
 import { registerSagaWithMiddleware } from './redux/saga';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
+import 'antd/dist/antd.css';
 
 const sagaMiddleware = createSagaMiddleware()
 
