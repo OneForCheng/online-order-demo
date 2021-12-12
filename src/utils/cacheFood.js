@@ -2,7 +2,7 @@ export const getFoodCachedKey = ({ page, size }) => `cached_foods_page_${page}_s
 
 export const setCachedFoods = (key, foods) => {
   try {
-    localStorage.setItem(key, foods);
+    localStorage.setItem(key, JSON.stringify(foods));
   } catch (err) {
     console.log(err)
   }
@@ -10,8 +10,10 @@ export const setCachedFoods = (key, foods) => {
 
 export const getCachedFoods = key => {
   try {
-    return localStorage.getItem(key);
+    const data = localStorage.getItem(key);
+    return JSON.parse(data) || null;
   } catch (err) {
     console.log(err)
+    return null;
   }
 }
