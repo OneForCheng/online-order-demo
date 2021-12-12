@@ -9,5 +9,9 @@ export const setCachedFoods = (key, foods) => {
 }
 
 export const getCachedFoods = key => {
-
+  try {
+    return localStorage.getItem(key);
+  } catch (err) {
+    console.log(err)
+  }
 }
