@@ -3,3 +3,6 @@
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
+import { localStorageMock } from './utils/localStorageMock';
+
+Object.defineProperty(global, 'localStorage', { value: localStorageMock });
