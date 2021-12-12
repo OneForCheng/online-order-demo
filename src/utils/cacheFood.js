@@ -7,3 +7,7 @@ export const setCachedFoods = (key, foods) => {
     console.log(err)
   }
 }
+
+export const getCachedFoods = key => {
+
+}

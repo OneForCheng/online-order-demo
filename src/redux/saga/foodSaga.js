@@ -1,17 +1,17 @@
 import { fetchFoodList } from '../../services/foodService';
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { getFoodCachedKey, setCachedFoods } from '../../utils/cacheFood';
+import { getCachedFoods, getFoodCachedKey, setCachedFoods } from '../../utils/cacheFood';
 import * as foodAction from '../actions/foodAction';
 
 export function * fetchFoodSaga(action) {
+  const cachedKey = getFoodCachedKey(action.payload);
   let data
   try {
     data = yield call(fetchFoodList, action.payload);
   } catch (err) {
-    data = {};
+    const cachedFoods = getCachedFoods(cachedKey);
   }
   yield put(foodAction.setFoodList(data));
-  const cachedKey = getFoodCachedKey(action.payload);
   setCachedFoods(cachedKey, data)
 }
 
