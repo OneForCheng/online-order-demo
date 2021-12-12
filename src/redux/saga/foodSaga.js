@@ -4,7 +4,12 @@ import { getFoodCachedKey, setCachedFoods } from '../../utils/cacheFood';
 import * as foodAction from '../actions/foodAction';
 
 export function * fetchFoodSaga(action) {
-  const data = yield call(fetchFoodList, action.payload);
+  let data
+  try {
+    data = yield call(fetchFoodList, action.payload);
+  } catch (err) {
+    data = {};
+  }
   yield put(foodAction.setFoodList(data));
   const cachedKey = getFoodCachedKey(action.payload);
   setCachedFoods(cachedKey, data)
