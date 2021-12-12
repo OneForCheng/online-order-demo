@@ -124,4 +124,23 @@ describe('food saga', () => {
       content: [{ id: 1, name: '香甜考肉饭', price: 15.5, description: '香甜可口，巴适得板' }]
     });
   });
+
+  it('should alert error when fetchOrderList throw error and ached foods ara empty', async () => {
+    jest.spyOn(foodService, 'fetchFoodList').mockReturnValue(Promise.reject({ errorCode: 'SYSTEM_ERROR', message: '系统错误，请稍后再试' }));
+    jest.spyOn(foodAction, 'setFoodList').mockReturnValue({  type: 'SET_FOOD_LIST' })
+    jest.spyOn(cacheFood, 'getCachedFoods').mockReturnValue(null)
+    global.alert = jest.fn();
+    const dispatched = [];
+    await runSaga({
+      dispatch: (action) => dispatched.push(action),
+      getState: () => ({}),
+    }, fetchFoodSaga, {
+      payload: {
+        page: 1,
+        size: 10,
+      }
+    });
+
+    expect(global.alert).toBeCalledWith('系统异常，请稍后重试');
+  });
 })

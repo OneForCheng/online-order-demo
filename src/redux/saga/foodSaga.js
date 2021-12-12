@@ -13,6 +13,8 @@ export function * fetchFoodSaga(action) {
     const cachedFoods = getCachedFoods(cachedKey);
     if (!isNil(cachedFoods)) {
       data = cachedFoods;
+    } else {
+      alert('系统异常，请稍后重试')
     }
   }
   yield put(foodAction.setFoodList(data));
