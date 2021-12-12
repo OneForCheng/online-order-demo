@@ -50,6 +50,7 @@ export class FoodList extends Component {
   render() {
     const { content, totalElements = 0 } = this.props.foodListData;
     return (<Table
+      rowKey="id"
       locale={{ emptyText: <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description="暂无数据" /> }}
       dataSource={content}
       columns={columns}

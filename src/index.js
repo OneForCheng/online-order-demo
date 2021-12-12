@@ -11,6 +11,7 @@ import { registerSagaWithMiddleware } from './redux/saga';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import 'antd/dist/antd.css';
+import { initCachedFoods } from './mockData';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -18,6 +19,8 @@ const initialState = {};
 const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware))
 
 registerSagaWithMiddleware(sagaMiddleware);
+
+initCachedFoods();
 
 ReactDOM.render(
     <Provider store={store}>
