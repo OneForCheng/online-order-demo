@@ -1,5 +1,6 @@
+import foodSaga from './foodSaga';
 
-const sagas = [];
+const sagas = [foodSaga];
 
 export const registerSagaWithMiddleware = middleware => {
     sagas.forEach((saga) => middleware.run(saga))
