@@ -11,7 +11,6 @@ import { registerSagaWithMiddleware } from './redux/saga';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga'
 import 'antd/dist/antd.css';
-import { initCachedFoods } from './mockData';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -20,7 +19,10 @@ const store = createStore(reducers, initialState, applyMiddleware(sagaMiddleware
 
 registerSagaWithMiddleware(sagaMiddleware);
 
-initCachedFoods();
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./mocks/browser');
+  worker.start()
+}
 
 ReactDOM.render(
     <Provider store={store}>
