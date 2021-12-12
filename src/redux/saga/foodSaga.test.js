@@ -142,5 +142,6 @@ describe('food saga', () => {
     });
 
     expect(global.alert).toBeCalledWith('系统异常，请稍后重试');
+    expect(foodAction.setFoodList).toBeCalledWith({})
   });
 })
